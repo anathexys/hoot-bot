@@ -19,4 +19,4 @@ class SentenceGenerator():
         pass
     
     def get_sentence(self):
-        return self.list_of_sentences[-1]
+        return choice(self.list_of_sentences)
