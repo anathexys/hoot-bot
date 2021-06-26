@@ -11,11 +11,12 @@ class SentenceGenerator():
         'the library in you grandfather house is so large it lets you enter the L-space. You end up unable to find that copy of Hamlet without all the \'e\'.',
         'you find yourself tied -- alone -- to a tramway tracks. Luckily, the person operating the switch chose the other tracks. Unluckily, the creator of the tramway dilemma forgot about the third rail.',
         'mandatory corporate events lead by your n+∞ (aka, his Fabiengness) are really not good for your sanity.',
-        'you try to connect to the server hosting the coffee machine and end up with a 418 error.'
+        'you try to connect to the server hosting the coffee machine and end up with a 418 error.',
+        'you look at a map of the USA and mixes Farhenreit and Celsius degrees, sending Las Vegas to hell for a dozen of days.'
     ]
     
     def __init__(self):
         pass
     
     def get_sentence(self):
-        return choice(self.list_of_sentences)
+        return choice(self.list_of_sentences[-1])
