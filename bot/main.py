@@ -27,7 +27,7 @@ async def on_raw_reaction_add(payload: discord.RawReactionActionEvent):
     
     channel = discord.utils.get(hoot_bot.get_all_channels(), id=payload.channel_id)
     message = await channel.fetch_message(payload.message_id)
-    adding_member = payload.member
+    adding_member = payload.member.nick
     # Because HootBot not answering itself
     if message.author == hoot_bot.user:
         return
