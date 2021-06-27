@@ -27,6 +27,7 @@ async def on_raw_reaction_add(payload: discord.RawReactionActionEvent):
     
     channel = discord.utils.get(hoot_bot.get_all_channels(), id=payload.channel_id)
     message = await channel.fetch_message(payload.message_id)
+    adding_member = payload.member
     # Because HootBot not answering itself
     if message.author == hoot_bot.user:
         return
@@ -36,8 +37,9 @@ async def on_raw_reaction_add(payload: discord.RawReactionActionEvent):
         sentence = sentence_gen.get_sentence()
         cast = Cast.get_random_cast()
         san_loss = f'You loose {cast.get_thrown_sum()} ({str(cast)}) points of SAN.'
+        courtesy = f'Courtesy of {adding_member}.'
 
-        msg = f'{author_mention}, {sentence} {san_loss}'
+        msg = f'{author_mention}, {sentence} {san_loss} {courtesy}'
         await message.reply(msg)
     return
 
