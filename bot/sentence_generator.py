@@ -1,6 +1,28 @@
 from random import choice
+from abc import ABCMeta, abstractmethod
+from pathlib import Path
+from typing import List
 
-class SentenceGenerator():
+class SentenceGeneratorBase(metaclass=ABCMeta):
+    @abstractmethod
+    def draw_sentence(self) -> str:
+        pass
+
+class TextFileSentenceGenerator(SentenceGeneratorBase):
+    def __init__(self, text_file_location: Path):
+        self.text_file_location = text_file_location
+
+    def get_sentence_list_from_path(self) -> List[str]:
+        with open(Path) as f:
+            sentence_list = f.readlines()
+        return sentence_list
+
+    def draw_sentence(self) -> str:
+        sentence_list = self.get_sentence_list_from_path()
+        return choice(sentence_list)
+
+
+class SentenceGenerator(SentenceGeneratorBase):
     '''Returns a generated sentence. Currently POC.'''
     list_of_sentences = [
         'you understand the reality of life on this server: you are all puppets to an almighty sadistic dungeon master.',
@@ -18,5 +40,5 @@ class SentenceGenerator():
     def __init__(self):
         pass
     
-    def get_sentence(self):
-        return choice(self.list_of_sentences)
+    def draw_sentence(self) -> str:
+         return choice(self.list_of_sentences)
