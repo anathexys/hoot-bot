@@ -1,6 +1,7 @@
 # imports from other modules
 from dice_cast import Cast
-from sentence_generator import SentenceGenerator
+from sentence_generator import SentenceGenerator, TextFileSentenceGenerator
+from pathlib import Path
 
 # imports of the discord libs
 import discord
@@ -19,7 +20,8 @@ intents.messages = True
 
 # Initialization of bot
 hoot_bot = commands.Bot(command_prefix='!!', intents=intents)
-sentence_gen = SentenceGenerator()
+sentence_gen_file_location = Path('sentence_files', 'base_sentence.gen')
+sentence_gen = TextFileSentenceGenerator(sentence_gen_file_location)
 
 # React to 🧊: send a random sentence and add a dice throw
 @hoot_bot.event
@@ -34,7 +36,7 @@ async def on_raw_reaction_add(payload: discord.RawReactionActionEvent):
     
     if str(payload.emoji) == '🧊':
         author_mention = message.author.mention
-        sentence = sentence_gen.get_sentence()
+        sentence = sentence_gen.draw_sentence()
         cast = Cast.get_random_cast()
         san_loss = f'You loose {cast.get_thrown_sum()} ({str(cast)}) points of SAN.'
         courtesy = f'Courtesy of {adding_member}.'
