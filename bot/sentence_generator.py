@@ -13,7 +13,7 @@ class TextFileSentenceGenerator(SentenceGeneratorBase):
         self.text_file_location = text_file_location
 
     def get_sentence_list_from_path(self) -> List[str]:
-        with open(Path) as f:
+        with self.text_file_location.open() as f:
             sentence_list = f.readlines()
         return sentence_list
 
