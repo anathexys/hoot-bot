@@ -3,6 +3,7 @@ from abc import ABCMeta, abstractmethod
 from pathlib import Path
 from typing import List
 
+
 class SentenceGeneratorBase(metaclass=ABCMeta):
     @abstractmethod
     def draw_sentence(self) -> str:
@@ -17,8 +18,11 @@ class TextFileSentenceGenerator(SentenceGeneratorBase):
             sentence_list = f.readlines()
         return sentence_list
 
-    def draw_sentence(self) -> str:
+    def draw_sentence(self, message: str) -> str:
         sentence_list = self.get_sentence_list_from_path()
+        print(message)
+        if message.isnumeric() and int(message) < len(sentence_list):
+            return sentence_list[int(message)]
         return choice(sentence_list)
 
 
