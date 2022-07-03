@@ -6,7 +6,7 @@ from typing import List
 
 class SentenceGeneratorBase(metaclass=ABCMeta):
     @abstractmethod
-    def draw_sentence(self) -> str:
+    def draw_sentence_from_message(self, message: str) -> str:
         pass
 
 class TextFileSentenceGenerator(SentenceGeneratorBase):
@@ -20,7 +20,6 @@ class TextFileSentenceGenerator(SentenceGeneratorBase):
 
     def draw_sentence(self, message: str) -> str:
         sentence_list = self.get_sentence_list_from_path()
-        print(message)
         if message.isnumeric() and int(message) < len(sentence_list):
             return sentence_list[int(message)]
         return choice(sentence_list)
